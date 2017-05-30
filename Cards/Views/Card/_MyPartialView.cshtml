@@ -1,0 +1,25 @@
+﻿@model List<Cards.Models.Card>
+
+
+@foreach (var card in Model)
+{
+    if (card.Color.Contains("red"))
+    {
+        <div class="col-md-2 card-border-red margin">
+            <p>@card.ID</p>
+            <p class="redColor">@card.CardName</p>
+            <p class="redColor">@card.Value</p>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-2 card-border margin">
+            <p>@card.ID</p>
+            <p>@card.CardName</p>
+            <p>@card.Value</p>
+        </div>
+    }
+
+}
+
+

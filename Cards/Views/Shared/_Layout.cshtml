@@ -1,0 +1,73 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @RenderSection("head", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="row margin">
+        <div class="col-md-8">
+            @Ajax.ActionLink("Show more cards", "ShowMore",
+             new AjaxOptions
+             {
+                 UpdateTargetId = "moreCards",
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "GET"
+             })
+
+            @Ajax.ActionLink("Take card", "ShowFirstCard", 
+             new AjaxOptions
+             {
+                 UpdateTargetId = "firstCard",
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "GET",
+                 OnSuccess = "updateCards()"
+             })
+
+            @Ajax.ActionLink("Randomize cards", "RandomCard", 
+             new AjaxOptions
+             {
+                 UpdateTargetId = "moreCards",
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "GET"
+             })
+
+            @Ajax.ActionLink("Group Cards by color", "GroupCardsByColor",
+             new AjaxOptions
+             {
+                 UpdateTargetId = "moreCards",
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "GET"
+             })
+
+            @Ajax.ActionLink("Group Cards by value", "GroupCardsByValue",
+             new AjaxOptions
+             {
+                 UpdateTargetId = "moreCards",
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "GET"
+             })
+           
+        </div>
+        <div id="firstCard" class="col-md-4 card-border"></div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-unobtrusive")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+    function updateCards() {
+        $("#moreCards").load("@Url.Action("UppdateCards", "Card")");
+    }
+    </script>
+</body>
+</html>
